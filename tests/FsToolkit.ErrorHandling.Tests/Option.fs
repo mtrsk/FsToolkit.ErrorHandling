@@ -175,6 +175,22 @@ let ofPairTests =
 
 let optionOperatorsTests =
     testList "Option Operators Tests" [
+        testCase "map & apply operators => Some"
+        <| fun _ ->
+            let input =
+                (+)
+                <!> (Some 2)
+                <*> (Some 2)
+
+            Expect.equal (input) (Some 4) ""
+        testCase "map & apply operators => None"
+        <| fun _ ->
+            let input =
+                (+)
+                <!> (Some 2)
+                <*> (None)
+
+            Expect.equal (input) (None) ""
         testCase "bind operator"
         <| fun _ ->
             let evenInt x = if x % 2 = 0 then Some x else None

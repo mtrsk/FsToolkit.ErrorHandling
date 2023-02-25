@@ -3,6 +3,14 @@ namespace FsToolkit.ErrorHandling
 [<RequireQualifiedAccess>]
 module Option =
 
+    let inline apply
+        (applier: Option<'input -> 'output>)
+        (input: Option<'input>)
+        : Option<'output> =
+        match (applier, input) with
+        | Some f, Some x -> Some(f x)
+        | _, _ -> None
+
     let inline bind ([<InlineIfLambdaAttribute>] f) x =
         match x with
         | Some v -> f v
